@@ -1,4 +1,36 @@
 // Convert API data to HTML (API: https://rickandmortyapi.com/api/character/)
+
+// fetch("http://example.com/movies.json")
+//   .then(response => {
+//     return response.json();
+//   })
+//   .then(data => {
+//     console.log(data);
+//   });
+
+fetch("https://rickandmortyapi.com/api/character")
+  .then(response => {
+    return response.json();
+  })
+  .then(data => {
+    console.log(data.results);
+
+    htmlString = data.results
+      .filter(char => char.status === "Alive")
+      .map(renderCharacter)
+      .join("");
+
+    document.body.innerHTML += htmlString;
+  });
+
+function renderCharacter(obj) {
+  return `<div data-id="${obj.id}">
+        <h2>${obj.name}</h2>
+        <p>${obj.species}</p>
+        <p>${obj.status}</p>
+        <img src="${obj.image}">`;
+}
+
 // The API returns a list of Rick and Morty characters.
 
 // 1. View the API in your browser to see the data you will recieve.
@@ -12,5 +44,5 @@
 // 5. On the JSON response, use array.map on the 'results' arrays.
 //    Use the renderCharacter function for mapping the data to HTML.
 // 6. Output the mapped HTML in the browser.
-// 
+//
 // 7. BONUS TASK - use array.filter to only show characters that are alive.
