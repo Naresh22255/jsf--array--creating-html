@@ -97,3 +97,4 @@ var htmlString = renderAdvert(advert);
 
 // add the HTML into the page
 document.body.innerHTML += htmlString;
+
